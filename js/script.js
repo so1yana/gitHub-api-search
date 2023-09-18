@@ -1,6 +1,6 @@
 let searchInput = document.querySelector('.search__input');
 let searchList = document.querySelector('.search__results-list');
-let deleteButton = document.querySelectorAll('.repos-list__item-button');
+let deleteButton = document.querySelectorAll('.delete-container');
 let reposList = document.querySelector('.repos-list');
 let listItems = document.querySelectorAll('.repos-list__item');
 
@@ -27,7 +27,6 @@ function clearChilds(element) {
 
 
 function addRepoItem(event) {
-    console.log(event)
     let fragment = document.createDocumentFragment();
     let item = document.createElement('div');
     item.classList.add('repos-list__item');
@@ -40,13 +39,16 @@ function addRepoItem(event) {
     itemOwner.textContent = `Owner: ${event.owner}`;
     let itemStars = document.createElement('span');
     itemStars.textContent = `Stars: ${event.stars}`;
+    let buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('delete-container');
     let itemButton = document.createElement('span');
     itemButton.classList.add('repos-list__item-button');
-    itemButton.addEventListener('click', deleteRepos);
+    buttonContainer.addEventListener('click', deleteRepos);
+    buttonContainer.appendChild(itemButton)
     itemInfo.appendChild(itemName);
     itemInfo.appendChild(itemOwner);
     itemInfo.appendChild(itemStars);
-    itemInfo.appendChild(itemButton);
+    itemInfo.appendChild(buttonContainer);
     itemInfo.addEventListener('click', openNewTab);
     item.appendChild(itemInfo)
     fragment.appendChild(item);
